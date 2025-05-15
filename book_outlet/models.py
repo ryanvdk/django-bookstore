@@ -9,11 +9,13 @@ from django.utils.text import slugify
 class Book(models.Model):
     # char field type max_length is required, ID column is automatically created.
     title = models.CharField(max_length=50)
-    rating = models.IntegerField(
-        validators=[MinValueValidator(1), MaxLengthValidator(5)])
+    # rating = models.IntegerField(
+    #          validators=[MinValueValidator(1), MaxLengthValidator(5)])
+    rating = models.IntegerField()
     author = models.CharField(null=True, max_length=100)
     is_bestselling = models.BooleanField(default=False)
-    slug = models.SlugField(default="", null=False, db_index=True)
+    slug = models.SlugField(default="",
+                            null=False, db_index=True)
 
     # Overrides how the object is represented when the string method is called, so for example how it is displayed in the console.
     def __str__(self):
