@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxLengthValidator
+from django.urls import reverse
 
 # Create your models here.
 
@@ -15,3 +16,6 @@ class Book(models.Model):
     # Overrides how the object is represented when the string method is called, so for example how it is displayed in the console.
     def __str__(self):
         return f"{self.title}{" by " + self.author if self.author else ""} ({self.rating}) {"Best Seller" if self.is_bestselling else ""}"
+
+    def get_absolute_url(self):
+        return reverse("book_details", args=[self.pk])
